@@ -9,14 +9,17 @@ let getHomepage = (reg, res) => {
         function(err, results, fields) {
             console.log('>>>check mysql')
             console.log(results);
-            results.map((row) => {data.push({
-                ID: row.ID,
-                Email: row.Email,
-                Address: row.Address,
-                LastName: row.LastName
-            })});
+            results.map((row) => {
+                data.push({
+                    ID: row.ID,
+                    Email: row.Email,
+                    Address: row.Address,
+                    LastName: row.LastName,
+                    FirstName: row.FirstName
+            })
+        });
 
-            return res.render('index.ejs', {dataUser: JSON.stringify(data)})
+            return res.render('index.ejs', {dataUser: data, test: 'abc string test'})
         }
     );
     console.log('>>>check data: ',typeof (data), data)
