@@ -1,6 +1,27 @@
+import connection from "../config/connectDB";
+
 let getHomepage = (reg, res) => {
     /*logic*/
-    return res.render('index.ejs')
+    let data = [];
+    //simple query
+    connection.query(
+        'SELECT * FROM `users`',
+        function(err, results, fields) {
+            console.log('>>>check mysql')
+            console.log(results);
+            results.map((row) => {data.push({
+                ID: row.ID,
+                Email: row.Email,
+                Address: row.Address,
+                LastName: row.LastName
+            })});
+
+            return res.render('index.ejs', {dataUser: JSON.stringify(data)})
+        }
+    );
+    console.log('>>>check data: ',typeof (data), data)
+
+    
 }
 
 module.exports = {
